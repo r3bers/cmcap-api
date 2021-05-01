@@ -75,4 +75,21 @@ class Api
         return [$modificator => $list];
     }
 
+    /**
+     * @param string $aux
+     * @param string $auxConst
+     * @return string
+     * @throws QueryParametersException
+     */
+    protected function checkAUX(string $aux, string $auxConst): string
+    {
+        if ($aux != '') {
+            $auxArray = explode(',', $aux);
+            $constArray = explode(',', $auxConst);
+            foreach ($auxArray as $givenAux)
+                if (!in_array($givenAux,$constArray))
+                    throw new QueryParametersException('aux parameter not in available list for this command');
+        }
+        return $aux;
+    }
 }
