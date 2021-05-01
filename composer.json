@@ -1,0 +1,35 @@
+{
+    "name": "r3bers/cmcap-api",
+    "type": "library",
+    "description": "PHP client for CoinMarketCap API",
+    "homepage": "https://github.com/r3bers/cmcap-api",
+    "keywords": ["client", "api", "php", "coinmarketcap", "rest", "cmcap-api", "coininfo"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/r3bers/cmcap-api/issues?state=open",
+        "source": "https://github.com/r3bers/cmcap-api"
+    },
+    "authors": [
+        {
+            "name": "Mikhail Solovev",
+            "email": "mike@solovjov.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2"
+    },
+    "autoload": {
+        "psr-4": { "R3bers\\CMCapApi\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "R3bers\\CMCapApi\\Tests\\": "tests/"}
+    },
+    "prefer-stable": true
+}
