@@ -30,7 +30,7 @@ class Cryptocurrency extends Api
      * @return array
      * @throws QueryParametersException | GuzzleException | TransformResponseException
      */
-    public function info(string $list, ?string $aux): array
+    public function info(string $list, ?string $aux = null): array
     {
         $options = ['query' => $this->processList($list)];
         if (isset($aux))
@@ -45,7 +45,7 @@ class Cryptocurrency extends Api
      * @return array
      * @throws QueryParametersException | GuzzleException | TransformResponseException
      */
-    public function map(string $list, ?string $aux): array
+    public function map(string $list, ?string $aux = null): array
     {
         $options = ['query' => $this->processList($list)];
         if (isset($aux))
@@ -55,14 +55,16 @@ class Cryptocurrency extends Api
     }
 
     /**
-     * @param $list
+     * @param string $list
      * @param string $convert
      * @param string|null $aux
      * @param bool $skip_invalid
      * @return array
-     * @throws QueryParametersException | GuzzleException | TransformResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \R3bers\CMCapApi\Exception\QueryParametersException
+     * @throws \R3bers\CMCapApi\Exception\TransformResponseException
      */
-    public function quotesLatest($list, string $convert, ?string $aux, bool $skip_invalid = false): array
+    public function quotesLatest(string $list, string $convert, ?string $aux = null, bool $skip_invalid = false): array
     {
         $options = ['query' => $this->processList($list)];
         if (isset($aux)) $options['query']['aux'] = $this->checkAUX($aux, $this->AUX_QUOTES_LATEST);
