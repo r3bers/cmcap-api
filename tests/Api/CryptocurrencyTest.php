@@ -37,11 +37,11 @@ class CryptocurrencyTest extends ApiTestCase
      */
     public function testQuotesLatest()
     {
-        $this->createApi()->quotesLatest('1,2,3', 'USD', 'status');
+        $this->createApi()->quotesLatest('1,2,3', 'USD', 'num_market_pairs');
         $request = $this->getLastRequest();
 
         $this->assertEquals(
-            '/v1/cryptocurrency/quotes/latest?id=1%2C2%2C3&aux=status&convert=USD',
+            '/v1/cryptocurrency/quotes/latest?id=1%2C2%2C3&aux=num_market_pairs&convert=USD',
             $request->getUri()->__toString()
         );
         $this->assertEquals(
