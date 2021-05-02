@@ -56,7 +56,6 @@ class Api
      */
     public function processList(string $list): array
     {
-        $modificator = $this->queryType[0];
         try {
             $input_list = explode(',', $list);
         } catch (TypeError $e) {
@@ -64,14 +63,16 @@ class Api
         }
         if (!is_string($input_list[0]) or $input_list[0] == '')
             throw new QueryParametersException('First Parameter is blank, it cannot be');
-        if (preg_match('/^[0-9a-zA-Z]+/', $input_list[0])) {
-            if (preg_match('/^[a-z]+/', $input_list[0]))
-                $modificator = $this->queryType[1];
-            if (preg_match('/^[A-Z]+/', $input_list[0]))
-                $modificator = $this->queryType[2];
-        } else {
+
+        if (preg_match('/^[0-9]+/', $input_list[0]))
+            $modificator = $this->queryType[0];
+        elseif (preg_match('/^[a-z]+/', $input_list[0]))
+            $modificator = $this->queryType[1];
+        elseif (preg_match('/^[A-Z]+/', $input_list[0]))
+            $modificator = $this->queryType[2];
+        else
             throw new QueryParametersException('Cannot find any number or letter in first element');
-        }
+
         return [$modificator => $list];
     }
 
@@ -81,13 +82,14 @@ class Api
      * @return string
      * @throws QueryParametersException
      */
-    protected function checkAUX(string $aux, string $auxConst): string
+    protected
+    function checkAUX(string $aux, string $auxConst): string
     {
         if ($aux != '') {
             $auxArray = explode(',', $aux);
             $constArray = explode(',', $auxConst);
             foreach ($auxArray as $givenAux)
-                if (!in_array($givenAux,$constArray))
+                if (!in_array($givenAux, $constArray))
                     throw new QueryParametersException('aux parameter not in available list for this command');
         }
         return $aux;
