@@ -7,6 +7,7 @@ namespace R3bers\CMCapApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use R3bers\CMCapApi\Api\Cryptocurrency;
+use R3bers\CMCapApi\Api\GlobalMetrics;
 use R3bers\CMCapApi\Exception\InvalidCredentialException;
 use R3bers\CMCapApi\Middleware\Authentication;
 
@@ -61,6 +62,16 @@ class CMCapClient
     {
         return new Cryptocurrency($this->getPrivateClient());
     }
+
+    /**
+     * @return \R3bers\CMCapApi\Api\GlobalMetrics
+     * @throws \R3bers\CMCapApi\Exception\InvalidCredentialException
+     */
+    public function globalMetrics(): GlobalMetrics
+    {
+        return new GlobalMetrics($this->getPrivateClient());
+    }
+
 
     /**
      * @return Client
